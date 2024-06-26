@@ -23,7 +23,24 @@ Each book object will have the following structure:
   year: number
 }
 */
-export function sortBooks(books) {}
+export function sortBooks(books) {
+  const sortBooks = [...books];
+
+  sortBooks.sort((a, b) => {
+    if (a.year !== b.year) {
+      //Sort books by year in ascending order
+      return a.year - b.year;
+    } else if (a.author !== b.author) {
+      //Sort books by author's name
+      return a.author.localeCompare(b.author);
+    } else {
+      //Sort books by title alph. order
+      return a.title.localeCompare(b.title);
+    }
+  });
+
+  return sortBooks;
+}
 
 /*
 Problem Description
@@ -42,4 +59,26 @@ Implement the function calculateHandValue(hand)
 that takes an array of strings representing the cards in the hand.
 Write unit tests to verify the functionality of the calculateHandValue function.
 */
-export function calculateHandValue(hand) {}
+export function calculateHandValue(hand) {
+  let totalValue = 0;
+  let aceCount = 0;
+
+  for (const card of hand) {
+    if (card === "A") {
+      aceCount += 1;
+      totalValue += 1;
+    } else if (["K", "Q", "J"].includes(card)) {
+      totalValue += 10;
+    } else {
+      totalValue += parseInt(card);
+    }
+  }
+
+  for (let i = 0; i < aceCount; i++) {
+    if (totalValue + 10 <= 21) {
+      totalValue += 10;
+    }
+  }
+
+  return totalValue;
+}

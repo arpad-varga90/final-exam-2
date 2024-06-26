@@ -1,4 +1,5 @@
 import "./App.css";
+import CharacterCard from "./CharacterCard";
 
 const characters = [
   { name: "Naruto Uzumaki", status: "Alive" },
@@ -14,7 +15,20 @@ const characters = [
 ];
 
 const App = () => {
-  return <div className="App">App</div>;
+  return (
+    <div className="app">
+      <h1>Naruto Characters</h1>
+      <div className="character-grid">
+        {characters.map((character, index) => (
+          <CharacterCard
+            key={index}
+            name={character.name}
+            status={character.status}
+          />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default App;
